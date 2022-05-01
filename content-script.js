@@ -25,63 +25,64 @@ function autoKeyVigenereCipher(plaintext, key){
 }
 
 function changeText() {
-    console.log("Masuk gan");
+    var prohib_words = [];
+    chrome.storage.sync.get("proh_words", ({proh_words}) => {
+        prohib_words = proh_words;
+    })
 
-    const proh_words = ["perkosa", "pemerkosaan"];
-    let allPText = document.body.getElementsByTagName("p");
-    let allSpanText = document.body.getElementsByTagName("span");
-    let allH1Text = document.body.getElementsByTagName("h1");
-    let allH2Text = document.body.getElementsByTagName("h2");
-    let allH3Text = document.body.getElementsByTagName("h3");
-    let allAText = document.body.getElementsByTagName("a");
+    chrome.storage.sync.get("isActive", ({isActive}) => {
+        if(isActive){
 
-    Array.prototype.forEach.call(allPText, element => {
-        if(proh_words.some(word => element.innerHTML.toLowerCase().includes(word))){
-            let key = "mkx";
-            element.innerHTML = autoKeyVigenereCipher(element.innerHTML, key);
+            let allPText = document.body.getElementsByTagName("p");
+            let allSpanText = document.body.getElementsByTagName("span");
+            let allH1Text = document.body.getElementsByTagName("h1");
+            let allH2Text = document.body.getElementsByTagName("h2");
+            let allH3Text = document.body.getElementsByTagName("h3");
+            // let allAText = document.body.getElementsByTagName("a");
+        
+            Array.prototype.forEach.call(allPText, element => {
+                if(prohib_words.some(word => element.innerText.toLowerCase().includes(word))){
+                    let key = "mkx";
+                    element.innerText = autoKeyVigenereCipher(element.innerText, key);
+                }
+            });
+        
+            Array.prototype.forEach.call(allSpanText, element => {
+                if(prohib_words.some(word => element.innerText.toLowerCase().includes(word))){
+                    let key = "mkx";
+                    element.innerText = autoKeyVigenereCipher(element.innerText, key);
+                }
+            });
+        
+            Array.prototype.forEach.call(allH1Text, element => {
+                if(prohib_words.some(word => element.innerText.toLowerCase().includes(word))){
+                    let key = "mkx";
+                    element.innerText = autoKeyVigenereCipher(element.innerText, key);
+                }
+            });
+        
+            Array.prototype.forEach.call(allH2Text, element => {
+                if(prohib_words.some(word => element.innerText.toLowerCase().includes(word))){
+                    let key = "mkx";
+                    element.innerText = autoKeyVigenereCipher(element.innerText, key);
+                }
+            });
+        
+            Array.prototype.forEach.call(allH3Text, element => {
+                if(prohib_words.some(word => element.innerText.toLowerCase().includes(word))){
+                    let key = "mkx";
+                    element.innerText = autoKeyVigenereCipher(element.innerText, key);
+                }
+            });
+        
+            // Array.prototype.forEach.call(allAText, element => {
+            //     if(prohib_words.some(word => element.innerText.toLowerCase().includes(word))){
+            //         let key = "mkx";
+            //         element.innerText = autoKeyVigenereCipher(element.innerText, key);
+            //     }
+            // });
         }
-    });
-
-    Array.prototype.forEach.call(allSpanText, element => {
-        if(proh_words.some(word => element.innerHTML.toLowerCase().includes(word))){
-            let key = "mkx";
-            element.innerHTML = autoKeyVigenereCipher(element.innerHTML, key);
-        }
-    });
-
-    Array.prototype.forEach.call(allH1Text, element => {
-        if(proh_words.some(word => element.innerHTML.toLowerCase().includes(word))){
-            let key = "mkx";
-            element.innerHTML = autoKeyVigenereCipher(element.innerHTML, key);
-        }
-    });
-
-    Array.prototype.forEach.call(allH2Text, element => {
-        if(proh_words.some(word => element.innerHTML.toLowerCase().includes(word))){
-            let key = "mkx";
-            element.innerHTML = autoKeyVigenereCipher(element.innerHTML, key);
-        }
-    });
-
-    Array.prototype.forEach.call(allH3Text, element => {
-        if(proh_words.some(word => element.innerHTML.toLowerCase().includes(word))){
-            let key = "mkx";
-            element.innerHTML = autoKeyVigenereCipher(element.innerHTML, key);
-        }
-    });
-
-    Array.prototype.forEach.call(allAText, element => {
-        if(proh_words.some(word => element.innerHTML.toLowerCase().includes(word))){
-            let key = "mkx";
-            element.innerHTML = autoKeyVigenereCipher(element.innerHTML, key);
-        }
-    });
+    })
 }
 
 changeText(); 
-
-// chrome.storage.sync.get(["isActive"], function(result){
-//     if(result.key){
-       
-//     } 
-// })
